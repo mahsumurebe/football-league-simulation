@@ -116,8 +116,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 const { url } = usePage();
 const mobileMenuOpen = ref(false);

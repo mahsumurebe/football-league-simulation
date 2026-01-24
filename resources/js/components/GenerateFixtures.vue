@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useLeague } from '@/composables/useLeague';
 
 const props = defineProps<{
@@ -73,7 +73,8 @@ const handleGenerate = async () => {
     setTimeout(() => {
       successMessage.value = null;
     }, 3000);
-  } catch (err) {
+  } catch {
+    // Error is handled by useLeague composable
   }
 };
 </script>

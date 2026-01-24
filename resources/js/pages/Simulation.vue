@@ -99,14 +99,14 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
 import { router } from '@inertiajs/vue3';
-import { useLeague } from '@/composables/useLeague';
-import Navigation from '@/components/Navigation.vue';
-import LeagueTable from '@/components/LeagueTable.vue';
-import WeekResults from '@/components/WeekResults.vue';
-import ChampionshipPredictions from '@/components/ChampionshipPredictions.vue';
+import { onMounted } from 'vue';
 import ActionButtons from '@/components/ActionButtons.vue';
+import ChampionshipPredictions from '@/components/ChampionshipPredictions.vue';
+import LeagueTable from '@/components/LeagueTable.vue';
+import Navigation from '@/components/Navigation.vue';
+import WeekResults from '@/components/WeekResults.vue';
+import { useLeague } from '@/composables/useLeague';
 
 const {
     matches,
@@ -119,24 +119,23 @@ const {
     canPlayNextWeek,
     allGamesPlayed,
     showPredictions,
-    loadMatches,
-    loadLeagueTable,
-    loadPredictions,
-    loadCurrentWeek,
     simulateNextWeek,
     simulateAll,
     resetLeague,
     refreshAll,
 } = useLeague();
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const handleWeekChanged = (week: number) => {
+    // Week change handler - currently no action needed
 };
 
 const handlePlayAll = async () => {
     try {
         await simulateAll();
         await refreshAll();
-    } catch (err) {
+    } catch {
+        // Error is handled by useLeague composable
     }
 };
 
@@ -144,7 +143,8 @@ const handlePlayNext = async () => {
     try {
         await simulateNextWeek();
         await refreshAll();
-    } catch (err) {
+    } catch {
+        // Error is handled by useLeague composable
     }
 };
 
@@ -153,7 +153,8 @@ const handleReset = async () => {
         await resetLeague();
         await refreshAll();
         router.visit('/generate-fixtures');
-    } catch (err) {
+    } catch {
+        // Error is handled by useLeague composable
     }
 };
 
