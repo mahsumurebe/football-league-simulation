@@ -12,6 +12,14 @@ done
 
 echo "PostgreSQL is up - executing commands"
 
+# Check if vendor directory exists (might be missing due to volume mount)
+if [ ! -d /var/www/html/vendor ] || [ ! -f /var/www/html/vendor/autoload.php ]; then
+    echo "Vendor directory not found. Installing Composer dependencies..."
+    composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts
+    composer dump-autoload --optimize --no-interaction
+    echo "Composer dependencies installed successfully"
+fi
+
 # Run migrations
 echo "Running database migrations..."
 php artisan migrate --force
