@@ -1,0 +1,2 @@
+-- Initialize database if needed
+-- This file runs automatically when MySQL container starts for the first time
