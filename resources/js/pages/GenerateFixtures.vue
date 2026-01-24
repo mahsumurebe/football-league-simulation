@@ -66,10 +66,10 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
 import { router } from '@inertiajs/vue3';
-import { useLeague } from '@/composables/useLeague';
+import { onMounted } from 'vue';
 import Navigation from '@/components/Navigation.vue';
+import { useLeague } from '@/composables/useLeague';
 
 const {
   teams,
@@ -87,7 +87,8 @@ const handleGenerate = async () => {
   try {
     await generateFixtures();
     router.visit('/fixtures');
-  } catch (err) {
+  } catch {
+    // Error is handled by useLeague composable
   }
 };
 
