@@ -72,7 +72,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const props = defineProps<{
+defineProps<{
   loading: boolean;
   canPlayNextWeek: boolean;
   allGamesPlayed: boolean;
