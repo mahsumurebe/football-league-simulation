@@ -1,0 +1,273 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Football League Simulation API",
+        "description": "API for managing and simulating football league matches",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api",
+            "description": "API Server"
+        }
+    ],
+    "paths": {
+        "/league/table": {
+            "get": {
+                "tags": [
+                    "League"
+                ],
+                "summary": "Get current league table",
+                "description": "Get current league table",
+                "operationId": "a2b484cbe8e77830ec7a8932fbf1f8d5",
+                "responses": {
+                    "200": {
+                        "description": "League table retrieved successfully"
+                    }
+                }
+            }
+        },
+        "/league/simulate-week": {
+            "post": {
+                "tags": [
+                    "League"
+                ],
+                "summary": "Simulate next week's games",
+                "description": "Simulate next week's games",
+                "operationId": "1b4910d36f7b4491ffdbde9ce644065b",
+                "responses": {
+                    "200": {
+                        "description": "Week simulated successfully"
+                    }
+                }
+            }
+        },
+        "/league/simulate-all": {
+            "post": {
+                "tags": [
+                    "League"
+                ],
+                "summary": "Simulate all remaining games",
+                "description": "Simulate all remaining games",
+                "operationId": "75831581d9acd54185015ed18d96be5f",
+                "responses": {
+                    "200": {
+                        "description": "All games simulated successfully"
+                    }
+                }
+            }
+        },
+        "/league/matches/week/{week}": {
+            "get": {
+                "tags": [
+                    "League"
+                ],
+                "summary": "Get matches by week",
+                "description": "Get game results by week",
+                "operationId": "45e7c843532a1f7e3732331fa22c39c8",
+                "parameters": [
+                    {
+                        "name": "week",
+                        "in": "path",
+                        "description": "Week number",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Matches retrieved successfully"
+                    }
+                }
+            }
+        },
+        "/league/reset": {
+            "post": {
+                "tags": [
+                    "League"
+                ],
+                "summary": "Reset league",
+                "description": "Reset league (for testing)",
+                "operationId": "4b9acf5a04fccd22ddf9ec62784e1a10",
+                "responses": {
+                    "200": {
+                        "description": "League reset successfully"
+                    }
+                }
+            }
+        },
+        "/league/predictions": {
+            "get": {
+                "tags": [
+                    "League"
+                ],
+                "summary": "Get current week predictions",
+                "description": "Get current week predictions",
+                "operationId": "0320a5e4207b30d541a04961ae5c8930",
+                "responses": {
+                    "200": {
+                        "description": "Predictions retrieved successfully"
+                    }
+                }
+            }
+        },
+        "/league/matches/{id}": {
+            "put": {
+                "tags": [
+                    "League"
+                ],
+                "summary": "Update a game's scores",
+                "description": "Update a game's scores",
+                "operationId": "08510a59f5050a41a0e629ec9f44137d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Game ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "home_score": {
+                                        "description": "Home team score (nullable to mark game as not played)",
+                                        "type": "integer",
+                                        "example": 2,
+                                        "nullable": true
+                                    },
+                                    "away_score": {
+                                        "description": "Away team score (nullable to mark game as not played)",
+                                        "type": "integer",
+                                        "example": 1,
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Game updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Game updated successfully"
+                                        },
+                                        "game": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "home_team": {
+                                                    "type": "string"
+                                                },
+                                                "away_team": {
+                                                    "type": "string"
+                                                },
+                                                "home_score": {
+                                                    "type": "integer",
+                                                    "nullable": true
+                                                },
+                                                "away_score": {
+                                                    "type": "integer",
+                                                    "nullable": true
+                                                },
+                                                "week": {
+                                                    "type": "integer"
+                                                },
+                                                "played": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "table": {
+                                            "description": "Updated league table",
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "team_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "played": {
+                                                        "type": "integer"
+                                                    },
+                                                    "won": {
+                                                        "type": "integer"
+                                                    },
+                                                    "drawn": {
+                                                        "type": "integer"
+                                                    },
+                                                    "lost": {
+                                                        "type": "integer"
+                                                    },
+                                                    "goals_for": {
+                                                        "type": "integer"
+                                                    },
+                                                    "goals_against": {
+                                                        "type": "integer"
+                                                    },
+                                                    "goal_difference": {
+                                                        "type": "integer"
+                                                    },
+                                                    "points": {
+                                                        "type": "integer"
+                                                    },
+                                                    "team": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "power": {
+                                                                "type": "integer"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Game not found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "League",
+            "description": "League"
+        }
+    ]
+}
