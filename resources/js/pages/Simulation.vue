@@ -25,12 +25,7 @@
                     {{ error }}
                 </div>
 
-                <div
-                    v-if="hasFixtures"
-                    :class="[
-                        'grid gap-6 grid-cols-1'
-                    ]"
-                >
+                <div v-if="hasFixtures" :class="['grid grid-cols-1 gap-6']">
                     <!-- League Table -->
                     <div>
                         <LeagueTable
@@ -99,14 +94,14 @@
 </template>
 
 <script setup lang="ts">
-import { router } from '@inertiajs/vue3';
-import { onMounted } from 'vue';
 import ActionButtons from '@/components/ActionButtons.vue';
 import ChampionshipPredictions from '@/components/ChampionshipPredictions.vue';
 import LeagueTable from '@/components/LeagueTable.vue';
 import Navigation from '@/components/Navigation.vue';
 import WeekResults from '@/components/WeekResults.vue';
 import { useLeague } from '@/composables/useLeague';
+import { router } from '@inertiajs/vue3';
+import { onMounted } from 'vue';
 
 const {
     matches,

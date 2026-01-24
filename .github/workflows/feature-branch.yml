@@ -104,9 +104,15 @@ jobs:
       - name: Validate Conventional Commits
         run: |
           echo "Checking commit messages follow conventional commit format..."
-          git log --oneline origin/${{ github.base_ref }}..HEAD | while read commit; do
-            if ! echo "$commit" | grep -qE '^(feat|fix|docs|style|refactor|perf|test|chore|ci|build|revert)(\(.+\))?: .+'; then
-              echo "❌ Commit message does not follow conventional commit format: $commit"
+          git log --format="%s" origin/${{ github.base_ref }}..HEAD | while read -r message; do
+            # Skip merge commits
+            if [[ "$message" =~ ^Merge ]]; then
+              echo "⏭️  Skipping merge commit: $message"
+              continue
+            fi
+            # Check conventional commit format
+            if ! echo "$message" | grep -qE '^(feat|fix|docs|style|refactor|perf|test|chore|ci|build|revert)(\(.+\))?: .+'; then
+              echo "❌ Commit message does not follow conventional commit format: $message"
               echo "Format: type(scope): subject"
               echo "Types: feat, fix, docs, style, refactor, perf, test, chore, ci, build, revert"
               exit 1
