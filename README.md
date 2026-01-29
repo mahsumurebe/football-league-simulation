@@ -141,675 +141,675 @@ http://localhost
 
 If you changed `APP_PORT` in `.env`, use `http://localhost:<APP_PORT>` instead.
 
-    ### Manual Installation
+### Manual Installation
 
-    If you prefer to run the application without Docker, follow these steps:
+If you prefer to run the application without Docker, follow these steps:
 
-    1. **Clone the repository**
+1. **Clone the repository**
 
-    ```bash
-    git clone https://github.com/mahsumurebe/football-league-simulation
-    cd football-league-simulation
-    ```
+```bash
+git clone https://github.com/mahsumurebe/football-league-simulation
+cd football-league-simulation
+```
 
-    2. **Install PHP dependencies**
+2. **Install PHP dependencies**
 
-    ```bash
-    composer install
-    ```
+```bash
+composer install
+```
 
-    3. **Install Node.js dependencies**
+3. **Install Node.js dependencies**
 
-    ```bash
-    npm install
-    ```
+```bash
+npm install
+```
 
-    4. **Configure environment**
+4. **Configure environment**
 
-    ```bash
-    cp .env.example .env
-    php artisan key:generate
-    ```
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-    5. **Configure database**
+5. **Configure database**
 
-    Edit `.env` file and set your database credentials:
+Edit `.env` file and set your database credentials:
 
-    ```env
-    DB_CONNECTION=pgsql
-    DB_HOST=127.0.0.1
-    DB_PORT=5432
-    DB_DATABASE=football_league
-    DB_USERNAME=your_username
-    DB_PASSWORD=your_password
-    ```
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=football_league
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-    6. **Create database**
+6. **Create database**
 
-    ```bash
-    createdb football_league
-    ```
+```bash
+createdb football_league
+```
 
-    Or using PostgreSQL client:
+Or using PostgreSQL client:
 
-    ```sql
-    CREATE DATABASE football_league;
-    ```
+```sql
+CREATE DATABASE football_league;
+```
 
-    7. **Run migrations and seeders**
+7. **Run migrations and seeders**
 
-    ```bash
-    php artisan migrate
-    php artisan db:seed
-    ```
+```bash
+php artisan migrate
+php artisan db:seed
+```
 
-    This will create the necessary tables and seed 4 teams (Chelsea, Arsenal, Manchester City, Liverpool) with their power ratings.
+This will create the necessary tables and seed 4 teams (Chelsea, Arsenal, Manchester City, Liverpool) with their power ratings.
 
-    8. **Build frontend assets**
+8. **Build frontend assets**
 
-    For production:
+For production:
 
-    ```bash
-    npm run build
-    ```
+```bash
+npm run build
+```
 
-    For development (with hot reload):
+For development (with hot reload):
 
-    ```bash
-    npm run dev
-    ```
+```bash
+npm run dev
+```
 
-    9. **Start development server**
+9. **Start development server**
 
-    ```bash
-    php artisan serve
-    ```
+```bash
+php artisan serve
+```
 
-    10. **Access the application**
+10. **Access the application**
 
-    Open your browser and navigate to:
+Open your browser and navigate to:
 
-    ```
-    http://localhost:8000
-    ```
+```
+http://localhost:8000
+```
 
-    ## Configuration
+## Configuration
 
-    ### Environment Variables
+### Environment Variables
 
-    Key environment variables you may want to configure:
+Key environment variables you may want to configure:
 
-    - `APP_ENV`: Application environment (`local`, `production`)
-    - `APP_DEBUG`: Enable/disable debug mode (`true`, `false`)
-    - `APP_URL`: Application URL
-    - `DB_*`: Database connection settings
-    - `SEED_DATABASE`: Set to `true` to automatically seed database on Docker startup
+- `APP_ENV`: Application environment (`local`, `production`)
+- `APP_DEBUG`: Enable/disable debug mode (`true`, `false`)
+- `APP_URL`: Application URL
+- `DB_*`: Database connection settings
+- `SEED_DATABASE`: Set to `true` to automatically seed database on Docker startup
 
-    ### File Permissions
+### File Permissions
 
-    Ensure these directories are writable:
+Ensure these directories are writable:
 
-    ```bash
-    chmod -R 775 storage bootstrap/cache
-    ```
+```bash
+chmod -R 775 storage bootstrap/cache
+```
 
-    If using Docker, permissions are set automatically by the entrypoint script.
+If using Docker, permissions are set automatically by the entrypoint script.
 
-    ## Usage
+## Usage
 
-    ### Getting Started
+### Getting Started
 
-    1. **View Teams**: Navigate to the Generate Fixtures page to see all available teams with their power ratings
+1. **View Teams**: Navigate to the Generate Fixtures page to see all available teams with their power ratings
 
-    2. **Generate Fixtures**: Click "Generate Fixtures" to create the round-robin schedule. This will automatically redirect you to the Fixtures page
+2. **Generate Fixtures**: Click "Generate Fixtures" to create the round-robin schedule. This will automatically redirect you to the Fixtures page
 
-    3. **View Fixtures**: On the Fixtures page, you'll see all matches organized by week in a card layout
+3. **View Fixtures**: On the Fixtures page, you'll see all matches organized by week in a card layout
 
-    4. **Start Simulation**: Click "Start Simulation" to navigate to the Simulation page
+4. **Start Simulation**: Click "Start Simulation" to navigate to the Simulation page
 
-    5. **Simulate Matches**:
-    - Use "Play Next Week" to simulate one week at a time
-    - Use "Play All Weeks" to simulate all remaining matches at once
-    - Watch the league table update in real-time
+5. **Simulate Matches**:
+- Use "Play Next Week" to simulate one week at a time
+- Use "Play All Weeks" to simulate all remaining matches at once
+- Watch the league table update in real-time
 
-    6. **View Predictions**: After week 4, championship probability predictions will appear, showing each team's chance of winning the league
+6. **View Predictions**: After week 4, championship probability predictions will appear, showing each team's chance of winning the league
 
-    7. **Edit Matches**: You can edit match results through the API (see API Documentation)
+7. **Edit Matches**: You can edit match results through the API (see API Documentation)
 
-    8. **Reset League**: Use "Reset Data" to clear all match results and return to the initial state
+8. **Reset League**: Use "Reset Data" to clear all match results and return to the initial state
 
-    ### User Flow
+### User Flow
 
-    The application follows a simple three-page flow:
+The application follows a simple three-page flow:
 
-    1. **Generate Fixtures** (`/generate-fixtures`): View teams and generate fixtures
-    2. **Fixtures** (`/fixtures`): Review the generated schedule
-    3. **Simulation** (`/simulation`): Run simulations and view results
+1. **Generate Fixtures** (`/generate-fixtures`): View teams and generate fixtures
+2. **Fixtures** (`/fixtures`): Review the generated schedule
+3. **Simulation** (`/simulation`): Run simulations and view results
 
-    After resetting, you'll be redirected back to the Generate Fixtures page to start over.
+After resetting, you'll be redirected back to the Generate Fixtures page to start over.
 
-    ## API Documentation
+## API Documentation
 
-    The application provides a RESTful API with standardized response format. All API endpoints are prefixed with `/api/league`.
+The application provides a RESTful API with standardized response format. All API endpoints are prefixed with `/api/league`.
 
-    ### Standard Response Format
+### Standard Response Format
 
-    **Success Response:**
-    ```json
-    {
-    "success": true,
-    "data": { ... },
-    "message": "Operation completed successfully"
-    }
-    ```
+**Success Response:**
+```json
+{
+  "success": true,
+  "data": { ... },
+  "message": "Operation completed successfully"
+}
+```
 
-    **Error Response:**
-    ```json
-    {
-    "success": false,
-    "message": "Error message",
-    "error": "ERROR_CODE"
-    }
-    ```
+**Error Response:**
+```json
+{
+  "success": false,
+  "message": "Error message",
+  "error": "ERROR_CODE"
+}
+```
 
-    **Validation Error Response:**
-    ```json
-    {
-    "success": false,
-    "message": "Validation failed",
-    "errors": {
+**Validation Error Response:**
+```json
+{
+  "success": false,
+  "message": "Validation failed",
+  "errors": {
     "field_name": ["Error message"]
-    }
-    }
-    ```
+  }
+}
+```
 
-    ### Endpoints
+### Endpoints
 
-    #### Generate Fixtures
+#### Generate Fixtures
 
-    **POST** `/api/league/generate-fixtures`
+**POST** `/api/league/generate-fixtures`
 
-    Generates round-robin fixtures for all existing teams. Requires at least 2 teams.
+Generates round-robin fixtures for all existing teams. Requires at least 2 teams.
 
-    **Response:**
-    ```json
-    {
-    "success": true,
-    "data": {
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
     "fixtures_count": 12,
     "weeks": 6,
     "team_count": 4
-    },
-    "message": "Fixtures generated successfully"
-    }
-    ```
+  },
+  "message": "Fixtures generated successfully"
+}
+```
 
-    #### Get Teams
+#### Get Teams
 
-    **GET** `/api/league/teams`
+**GET** `/api/league/teams`
 
-    Retrieves all teams with their power ratings.
+Retrieves all teams with their power ratings.
 
-    **Response:**
-    ```json
+**Response:**
+```json
+{
+  "success": true,
+  "data": [
     {
-    "success": true,
-    "data": [
-    {
-    "id": 1,
-    "name": "Chelsea",
-    "power": 90
+      "id": 1,
+      "name": "Chelsea",
+      "power": 90
     }
-    ]
-    }
-    ```
+  ]
+}
+```
 
-    #### Get Matches
+#### Get Matches
 
-    **GET** `/api/league/matches`
+**GET** `/api/league/matches`
 
-    Retrieves all matches grouped by week.
+Retrieves all matches grouped by week.
 
-    **Response:**
-    ```json
-    {
-    "success": true,
-    "data": {
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
     "weeks": [
-    {
-    "week": 1,
-    "matches": [
-    {
-    "id": 1,
-    "home_team": "Chelsea",
-    "away_team": "Arsenal",
-    "home_score": 2,
-    "away_score": 1,
-    "played": true,
-    "week": 1
-    }
+      {
+        "week": 1,
+        "matches": [
+          {
+            "id": 1,
+            "home_team": "Chelsea",
+            "away_team": "Arsenal",
+            "home_score": 2,
+            "away_score": 1,
+            "played": true,
+            "week": 1
+          }
+        ]
+      }
     ]
-    }
-    ]
-    }
-    }
-    ```
+  }
+}
+```
 
-    #### Get Current Week
+#### Get Current Week
 
-    **GET** `/api/league/current-week`
+**GET** `/api/league/current-week`
 
-    Retrieves information about the current week status.
+Retrieves information about the current week status.
 
-    **Response:**
-    ```json
-    {
-    "success": true,
-    "data": {
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
     "last_played_week": 3,
     "next_week": 4,
     "total_weeks": 6
-    }
-    }
-    ```
+  }
+}
+```
 
-    #### Get League Table
+#### Get League Table
 
-    **GET** `/api/league/table`
+**GET** `/api/league/table`
 
-    Retrieves the current league standings, ordered by points, goal difference, and goals for.
+Retrieves the current league standings, ordered by points, goal difference, and goals for.
 
-    **Response:**
-    ```json
+**Response:**
+```json
+{
+  "success": true,
+  "data": [
     {
-    "success": true,
-    "data": [
-    {
-    "id": 1,
-    "team_id": 1,
-    "played": 4,
-    "won": 3,
-    "drawn": 1,
-    "lost": 0,
-    "goals_for": 9,
-    "goals_against": 5,
-    "goal_difference": 4,
-    "points": 10,
-    "team": {
-    "id": 1,
-    "name": "Chelsea",
-    "power": 90
+      "id": 1,
+      "team_id": 1,
+      "played": 4,
+      "won": 3,
+      "drawn": 1,
+      "lost": 0,
+      "goals_for": 9,
+      "goals_against": 5,
+      "goal_difference": 4,
+      "points": 10,
+      "team": {
+        "id": 1,
+        "name": "Chelsea",
+        "power": 90
+      }
     }
-    }
-    ]
-    }
-    ```
+  ]
+}
+```
 
-    #### Simulate Next Week
+#### Simulate Next Week
 
-    **POST** `/api/league/simulate-week`
+**POST** `/api/league/simulate-week`
 
-    Simulates all matches for the next unplayed week.
+Simulates all matches for the next unplayed week.
 
-    **Response:**
-    ```json
-    {
-    "success": true,
-    "data": {
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
     "week": 4,
     "results": [
-    {
-    "match_id": 7,
-    "home_team": "Chelsea",
-    "away_team": "Liverpool",
-    "score": "2 - 1"
-    }
+      {
+        "match_id": 7,
+        "home_team": "Chelsea",
+        "away_team": "Liverpool",
+        "score": "2 - 1"
+      }
     ],
     "table": [ ... ],
     "predictions": [ ... ]
-    },
-    "message": "Week simulated successfully"
-    }
-    ```
+  },
+  "message": "Week simulated successfully"
+}
+```
 
-    #### Simulate All
+#### Simulate All
 
-    **POST** `/api/league/simulate-all`
+**POST** `/api/league/simulate-all`
 
-    Simulates all remaining unplayed matches.
+Simulates all remaining unplayed matches.
 
-    **Response:**
-    ```json
-    {
-    "success": true,
-    "data": {
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
     "results": [ ... ],
     "table": [ ... ],
     "predictions": [ ... ]
-    },
-    "message": "All games simulated successfully"
-    }
-    ```
+  },
+  "message": "All games simulated successfully"
+}
+```
 
-    #### Get Matches by Week
+#### Get Matches by Week
 
-    **GET** `/api/league/matches/week/{week}`
+**GET** `/api/league/matches/week/{week}`
 
-    Retrieves all matches for a specific week.
+Retrieves all matches for a specific week.
 
-    **Parameters:**
-    - `week` (integer, required): Week number
+**Parameters:**
+- `week` (integer, required): Week number
 
-    **Response:**
-    ```json
-    {
-    "success": true,
-    "data": {
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
     "week": 1,
     "matches": [ ... ]
-    }
-    }
-    ```
+  }
+}
+```
 
-    #### Update Match
+#### Update Match
 
-    **PUT** `/api/league/matches/{id}`
+**PUT** `/api/league/matches/{id}`
 
-    Updates a match result. Automatically recalculates standings.
+Updates a match result. Automatically recalculates standings.
 
-    **Parameters:**
-    - `id` (integer, required): Match ID
+**Parameters:**
+- `id` (integer, required): Match ID
 
-    **Request Body:**
-    ```json
-    {
-    "home_score": 2,
-    "away_score": 1
-    }
-    ```
+**Request Body:**
+```json
+{
+  "home_score": 2,
+  "away_score": 1
+}
+```
 
-    **Response:**
-    ```json
-    {
-    "success": true,
-    "data": {
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
     "game": { ... },
     "table": [ ... ]
-    },
-    "message": "Game updated successfully"
-    }
-    ```
+  },
+  "message": "Game updated successfully"
+}
+```
 
-    #### Reset League
+#### Reset League
 
-    **POST** `/api/league/reset`
+**POST** `/api/league/reset`
 
-    Resets all match results and standings to initial state. Fixtures remain intact.
+Resets all match results and standings to initial state. Fixtures remain intact.
 
-    **Response:**
-    ```json
+**Response:**
+```json
+{
+  "success": true,
+  "message": "League reset successfully"
+}
+```
+
+#### Get Predictions
+
+**GET** `/api/league/predictions`
+
+Retrieves championship probability predictions. Only available after week 4.
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": [
     {
-    "success": true,
-    "message": "League reset successfully"
+      "team_id": 1,
+      "team_name": "Chelsea",
+      "probability": 45.5
     }
-    ```
+  ]
+}
+```
 
-    #### Get Predictions
+If called before week 4:
 
-    **GET** `/api/league/predictions`
+```json
+{
+  "success": true,
+  "message": "Predictions available after week 4"
+}
+```
 
-    Retrieves championship probability predictions. Only available after week 4.
+### API Documentation (Swagger)
 
-    **Response:**
-    ```json
-    {
-    "success": true,
-    "data": [
-    {
-    "team_id": 1,
-    "team_name": "Chelsea",
-    "probability": 45.5
-    }
-    ]
-    }
-    ```
+Interactive API documentation is available at:
 
-    If called before week 4:
+```
+http://localhost/api/documentation
+```
 
-    ```json
-    {
-    "success": true,
-    "message": "Predictions available after week 4"
-    }
-    ```
+(Replace `localhost` with your domain in production)
 
-    ### API Documentation (Swagger)
+## Testing
 
-    Interactive API documentation is available at:
+The application includes comprehensive test coverage with 81 tests covering 2,483 assertions.
 
-    ```
-    http://localhost/api/documentation
-    ```
+### Running Tests
 
-    (Replace `localhost` with your domain in production)
+```bash
+php artisan test
+```
 
-    ## Testing
+### Test Structure
 
-    The application includes comprehensive test coverage with 81 tests covering 2,483 assertions.
+- **Feature Tests**: Test API endpoints and integration
+- `LeagueControllerTest`: API endpoint tests
+- `LeagueManagerTest`: League management functionality
+- `FixtureGeneratorTest`: Fixture generation logic
+- `GameSimulatorTest`: Match simulation logic
+- `PredictionEngineTest`: Prediction calculations
 
-    ### Running Tests
+- **Unit Tests**: Test individual components
+- `StandingsCalculationTest`: Standings calculation and ordering
 
-    ```bash
-    php artisan test
-    ```
+### Running Specific Test Suites
+
+```bash
+# Run only feature tests
+php artisan test --testsuite=Feature
 
-    ### Test Structure
+# Run only unit tests
+php artisan test --testsuite=Unit
 
-    - **Feature Tests**: Test API endpoints and integration
-    - `LeagueControllerTest`: API endpoint tests
-    - `LeagueManagerTest`: League management functionality
-    - `FixtureGeneratorTest`: Fixture generation logic
-    - `GameSimulatorTest`: Match simulation logic
-    - `PredictionEngineTest`: Prediction calculations
+# Run a specific test file
+php artisan test tests/Feature/LeagueControllerTest.php
 
-    - **Unit Tests**: Test individual components
-    - `StandingsCalculationTest`: Standings calculation and ordering
-
-    ### Running Specific Test Suites
-
-    ```bash
-    # Run only feature tests
-    php artisan test --testsuite=Feature
+# Run with coverage (requires Xdebug)
+php artisan test --coverage
+```
 
-    # Run only unit tests
-    php artisan test --testsuite=Unit
+## Architecture
+
+### Backend Architecture
 
-    # Run a specific test file
-    php artisan test tests/Feature/LeagueControllerTest.php
+The backend follows a service layer architecture with clear separation of concerns:
 
-    # Run with coverage (requires Xdebug)
-    php artisan test --coverage
-    ```
-
-    ## Architecture
-
-    ### Backend Architecture
-
-    The backend follows a service layer architecture with clear separation of concerns:
+**Models:**
+- `Team`: Represents football teams with power ratings
+- `Game`: Represents individual matches with scores and status
+- `LeagueStanding`: Represents current league table positions
+- `ChampionshipPrediction`: Stores probability predictions per team per week
 
-    **Models:**
-    - `Team`: Represents football teams with power ratings
-    - `Game`: Represents individual matches with scores and status
-    - `LeagueStanding`: Represents current league table positions
-    - `ChampionshipPrediction`: Stores probability predictions per team per week
-
-    **Services:**
-    - `FixtureGeneratorService`: Generates round-robin fixtures for teams
-    - `GameSimulatorService`: Simulates match outcomes based on team powers and probabilities
-    - `LeagueManagerService`: Manages league progression, standings updates, and match simulation
-    - `PredictionEngineService`: Calculates championship probabilities based on current standings and remaining fixtures
+**Services:**
+- `FixtureGeneratorService`: Generates round-robin fixtures for teams
+- `GameSimulatorService`: Simulates match outcomes based on team powers and probabilities
+- `LeagueManagerService`: Manages league progression, standings updates, and match simulation
+- `PredictionEngineService`: Calculates championship probabilities based on current standings and remaining fixtures
 
-    **Controllers:**
-    - `LeagueController`: Handles all API requests, delegates to services, returns standardized responses
+**Controllers:**
+- `LeagueController`: Handles all API requests, delegates to services, returns standardized responses
 
-    **Traits:**
-    - `ApiResponse`: Provides standardized JSON response methods for consistent API responses
-
-    ### Frontend Architecture
-
-    The frontend is built as a single-page application using Inertia.js:
-
-    **Pages:**
-    - `GenerateFixtures.vue`: Tournament teams view and fixture generation
-    - `Fixtures.vue`: All fixtures displayed by week
-    - `Simulation.vue`: Match simulation interface with league table, results, and predictions
-
-    **Components:**
-    - `Navigation.vue`: Header navigation bar
-    - `LeagueTable.vue`: League standings table
-    - `WeekResults.vue`: Match results for selected week
-    - `ChampionshipPredictions.vue`: Probability predictions display
-    - `ActionButtons.vue`: Simulation control buttons
-    - `FixturesView.vue`: Fixtures display component
-    - `GenerateFixtures.vue`: Fixture generation component
-
-    **Composables:**
-    - `useLeague.ts`: Centralized state management and API interactions for league data
-
-    **API Client:**
-    - `api.ts`: Type-safe API client with error handling and response parsing
-
-    ### Database Schema
-
-    **teams**
-    - `id`: Primary key
-    - `name`: Team name
-    - `power`: Team power rating (affects match outcomes)
-    - `logo`: Optional team logo URL
-    - `created_at`, `updated_at`: Timestamps
-
-    **games**
-    - `id`: Primary key
-    - `home_team_id`: Foreign key to teams
-    - `away_team_id`: Foreign key to teams
-    - `home_score`: Home team score (nullable)
-    - `away_score`: Away team score (nullable)
-    - `week`: Week number
-    - `played`: Boolean indicating if match has been played
-    - `created_at`, `updated_at`: Timestamps
-
-    **league_standings**
-    - `id`: Primary key
-    - `team_id`: Foreign key to teams
-    - `played`: Number of matches played
-    - `won`: Number of wins
-    - `drawn`: Number of draws
-    - `lost`: Number of losses
-    - `goals_for`: Total goals scored
-    - `goals_against`: Total goals conceded
-    - `goal_difference`: Goals for minus goals against
-    - `points`: Total points (3 for win, 1 for draw, 0 for loss)
-    - `created_at`, `updated_at`: Timestamps
-
-    **championship_predictions**
-    - `id`: Primary key
-    - `team_id`: Foreign key to teams
-    - `week`: Week number
-    - `probability`: Championship probability percentage
-    - `created_at`, `updated_at`: Timestamps
-
-    ## Algorithm Details
-
-    ### Match Simulation
-
-    Matches are simulated using a probabilistic algorithm:
-
-    1. **Calculate Adjusted Powers**: Home team gets +5 power boost
-    2. **Determine Win Probabilities**: Based on power ratio between teams
-    3. **Apply Draw Chance**: 20% base chance for a draw
-    4. **Generate Outcome**: Random number determines win/draw/loss
-    5. **Generate Scores**: Realistic score ranges based on outcome:
-    - Home win: 1-3 goals for home, 0-2 goals for away
-    - Draw: 0-2 goals for both teams
-    - Away win: 1-3 goals for away, 0-2 goals for home
-
-    ### Standings Calculation
-
-    Standings are calculated using Premier League rules:
-
-    1. **Points**: 3 for win, 1 for draw, 0 for loss
-    2. **Goal Difference**: Goals for minus goals against
-    3. **Ordering**:
-    - Primary: Points (descending)
-    - Secondary: Goal difference (descending)
-    - Tertiary: Goals for (descending)
-
-    When match results are updated, standings are recalculated from scratch to ensure consistency.
-
-    ### Championship Predictions
-
-    Predictions are calculated starting from week 4:
-
-    1. **Check Minimum Week**: Predictions only available after week 4
-    2. **Calculate Remaining Games**: For each team, identify remaining unplayed matches
-    3. **Estimate Expected Points**: Based on team power, opponent power, and home/away status
-    4. **Project Final Points**: Current points + expected points from remaining games
-    5. **Calculate Probabilities**: Relative probability based on projected final points
-    6. **Normalize**: Ensure probabilities sum to 100%
-
-    If all games are played, the team with the most points gets 100% probability.
-
-    ### Fixture Generation
-
-    Fixtures are generated using a round-robin algorithm:
-
-    1. **Team Pairing**: Each team plays every other team twice (home and away)
-    2. **Week Distribution**: Matches are distributed across weeks to ensure each team plays once per week
-    3. **Total Matches**: For 4 teams, this results in 12 matches (6 weeks × 2 matches per week)
-
-    ## Development
-
-    ### Development Commands
-
-    **Start development server:**
-    ```bash
-    composer dev
-    ```
-
-    This runs:
-    - Laravel development server
-    - Queue worker
-    - Log viewer (Pail)
-    - Vite dev server (hot reload)
-
-    **Build frontend for production:**
-    ```bash
-    npm run build
-    ```
-
-    **Run code formatters:**
-    ```bash
-    # PHP
-    composer lint
-
-    # JavaScript/TypeScript
-    npm run lint
-    npm run format
-    ```
-
-    **Clear caches:**
-    ```bash
-    php artisan config:clear
-    php artisan cache:clear
-    php artisan route:clear
-    php artisan view:clear
-    ```
-
-    ### Code Style
-
-    - **PHP**: Follows PSR-12 coding standards (enforced by Laravel Pint)
-    - **JavaScript/TypeScript**: Follows ESLint and Prettier configurations
-    - **Vue Components**: Uses Composition API with `<script setup>` syntax
+**Traits:**
+- `ApiResponse`: Provides standardized JSON response methods for consistent API responses
+
+### Frontend Architecture
+
+The frontend is built as a single-page application using Inertia.js:
+
+**Pages:**
+- `GenerateFixtures.vue`: Tournament teams view and fixture generation
+- `Fixtures.vue`: All fixtures displayed by week
+- `Simulation.vue`: Match simulation interface with league table, results, and predictions
+
+**Components:**
+- `Navigation.vue`: Header navigation bar
+- `LeagueTable.vue`: League standings table
+- `WeekResults.vue`: Match results for selected week
+- `ChampionshipPredictions.vue`: Probability predictions display
+- `ActionButtons.vue`: Simulation control buttons
+- `FixturesView.vue`: Fixtures display component
+- `GenerateFixtures.vue`: Fixture generation component
+
+**Composables:**
+- `useLeague.ts`: Centralized state management and API interactions for league data
+
+**API Client:**
+- `api.ts`: Type-safe API client with error handling and response parsing
+
+### Database Schema
+
+**teams**
+- `id`: Primary key
+- `name`: Team name
+- `power`: Team power rating (affects match outcomes)
+- `logo`: Optional team logo URL
+- `created_at`, `updated_at`: Timestamps
+
+**games**
+- `id`: Primary key
+- `home_team_id`: Foreign key to teams
+- `away_team_id`: Foreign key to teams
+- `home_score`: Home team score (nullable)
+- `away_score`: Away team score (nullable)
+- `week`: Week number
+- `played`: Boolean indicating if match has been played
+- `created_at`, `updated_at`: Timestamps
+
+**league_standings**
+- `id`: Primary key
+- `team_id`: Foreign key to teams
+- `played`: Number of matches played
+- `won`: Number of wins
+- `drawn`: Number of draws
+- `lost`: Number of losses
+- `goals_for`: Total goals scored
+- `goals_against`: Total goals conceded
+- `goal_difference`: Goals for minus goals against
+- `points`: Total points (3 for win, 1 for draw, 0 for loss)
+- `created_at`, `updated_at`: Timestamps
+
+**championship_predictions**
+- `id`: Primary key
+- `team_id`: Foreign key to teams
+- `week`: Week number
+- `probability`: Championship probability percentage
+- `created_at`, `updated_at`: Timestamps
+
+## Algorithm Details
+
+### Match Simulation
+
+Matches are simulated using a probabilistic algorithm:
+
+1. **Calculate Adjusted Powers**: Home team gets +5 power boost
+2. **Determine Win Probabilities**: Based on power ratio between teams
+3. **Apply Draw Chance**: 20% base chance for a draw
+4. **Generate Outcome**: Random number determines win/draw/loss
+5. **Generate Scores**: Realistic score ranges based on outcome:
+- Home win: 1-3 goals for home, 0-2 goals for away
+- Draw: 0-2 goals for both teams
+- Away win: 1-3 goals for away, 0-2 goals for home
+
+### Standings Calculation
+
+Standings are calculated using Premier League rules:
+
+1. **Points**: 3 for win, 1 for draw, 0 for loss
+2. **Goal Difference**: Goals for minus goals against
+3. **Ordering**:
+- Primary: Points (descending)
+- Secondary: Goal difference (descending)
+- Tertiary: Goals for (descending)
+
+When match results are updated, standings are recalculated from scratch to ensure consistency.
+
+### Championship Predictions
+
+Predictions are calculated starting from week 4:
+
+1. **Check Minimum Week**: Predictions only available after week 4
+2. **Calculate Remaining Games**: For each team, identify remaining unplayed matches
+3. **Estimate Expected Points**: Based on team power, opponent power, and home/away status
+4. **Project Final Points**: Current points + expected points from remaining games
+5. **Calculate Probabilities**: Relative probability based on projected final points
+6. **Normalize**: Ensure probabilities sum to 100%
+
+If all games are played, the team with the most points gets 100% probability.
+
+### Fixture Generation
+
+Fixtures are generated using a round-robin algorithm:
+
+1. **Team Pairing**: Each team plays every other team twice (home and away)
+2. **Week Distribution**: Matches are distributed across weeks to ensure each team plays once per week
+3. **Total Matches**: For 4 teams, this results in 12 matches (6 weeks × 2 matches per week)
+
+## Development
+
+### Development Commands
+
+**Start development server:**
+```bash
+composer dev
+```
+
+This runs:
+- Laravel development server
+- Queue worker
+- Log viewer (Pail)
+- Vite dev server (hot reload)
+
+**Build frontend for production:**
+```bash
+npm run build
+```
+
+**Run code formatters:**
+```bash
+# PHP
+composer lint
+
+# JavaScript/TypeScript
+npm run lint
+npm run format
+```
+
+**Clear caches:**
+```bash
+php artisan config:clear
+php artisan cache:clear
+php artisan route:clear
+php artisan view:clear
+```
+
+### Code Style
+
+- **PHP**: Follows PSR-12 coding standards (enforced by Laravel Pint)
+- **JavaScript/TypeScript**: Follows ESLint and Prettier configurations
+- **Vue Components**: Uses Composition API with `<script setup>` syntax
 
 ### Hot Reload
 
@@ -818,7 +818,7 @@ During development, Vite provides hot module replacement (HMR) for instant updat
 ## Project Structure
 
 ```
-        football-league-simulation/
+football-league-simulation/
 ├── app/
 │   ├── Enums/              # Enumerations (Outcome)
 │   ├── Http/
@@ -851,7 +851,7 @@ During development, Vite provides hot module replacement (HMR) for instant updat
 ├── docker-compose.yaml      # Docker Compose configuration
 ├── Dockerfile               # Docker image definition
 └── README.md               # This file
-            ```
+```
 
 ## License
 
